@@ -29,8 +29,7 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
     output = lgms_command(@game.servername)
 
-    @game.output = output
-    @game.location = regex_game_name(output)
+    @game.update_attributes(output: output, location: regex_game_name(output))
     if @game.save
       redirect_to @game
     else
