@@ -1,0 +1,22 @@
+
+<h1>Listing game servers</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Type</th>
+  </tr>
+
+  <% @games.each do |game| %>
+      <tr>
+        <td><%= game.title %></td>
+        <td><%= game.servername %></td>
+        <td><%= link_to 'Show', game_path(game) %></td>
+      </tr>
+  <% end %>
+</table>
+
+
+<%= form_with scope: :game,  method: :get, url: new_game_path, local: true do |form| %>
+    <%= submit_tag('New Server') %>
+<% end %>

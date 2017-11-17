@@ -1,0 +1,34 @@
+<h1>Game Server</h1>
+
+
+<p>
+  <strong>Title:</strong>
+  <%= @game.title %>
+</p>
+
+<p>
+  <strong>Servertyp:</strong>
+  <%= @game.servername %>
+</p>
+
+<p>
+  <strong>Output:</strong>
+  <% @game.output.lines do |line| %>
+    <br/><%= line %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Aktuelle Konsolenausgabe:</strong>
+  <% @log.lines do |line| %>
+      <br/><%= line %>
+  <% end %>
+</p>
+
+<%= form_with scope: :game, url: start_game_path, local: true do |form| %>
+  <%= submit_tag("Start Server") %>
+<% end %>
+
+<%= form_with scope: :game, url: stop_game_path, local: true do |form| %>
+  <%= submit_tag("Stop Server") %>
+<% end %>
