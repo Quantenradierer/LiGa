@@ -5,5 +5,13 @@ class User < ApplicationRecord
             uniqueness: true
   validates :password, presence: true, length: { minimum: 8 }
 
+  has_many :assignments
+  has_many :roles, through: :assignments
+
   has_secure_password
+
+  def role?(role)
+    roles.any? { |r| r.name.underscore.to_sym == role }
+  end
+
 end

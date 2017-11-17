@@ -27,6 +27,8 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
+    authorize @game
+
     output = lgms_command(@game.servername)
 
     @game.update_attributes(output: output, location: regex_game_name(output))
