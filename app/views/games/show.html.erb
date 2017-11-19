@@ -29,9 +29,7 @@
   <strong>Verfügbare Logs:</strong>
   <% @game.available_logs.each do |file| %>
     <br/>
-      <%= link_to 'test', [@game, :gamelog]%>
-
-      <%= File.basename(file) %>
+      <%= link_to File.basename(file), game_gamelog_path(@game, File.basename(file))%>
   <% end %>
 </p>
 

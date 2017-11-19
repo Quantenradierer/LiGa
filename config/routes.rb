@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
 
   resources :games do
-    resources :gamelogs
+    resources :gamelogs, only: :show
     member do
       post 'start'
       post 'stop'

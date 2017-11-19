@@ -1,0 +1,6 @@
+<p>
+  <strong><%= @log_name %></strong>
+  <% @log.lines do |line| %>
+      <br/><%= line %>
+  <% end %>
+</p>

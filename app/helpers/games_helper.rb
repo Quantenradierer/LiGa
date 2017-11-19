@@ -1,11 +1,6 @@
 require 'pty'
 
 module GamesHelper
-
-  def get_server_name(output)
-    output[/.*server as ([^\n]*)/,1]
-  end
-
   def create_server_name
     [*('a'..'z'),*('0'..'9')].shuffle[0,16].join
   end
