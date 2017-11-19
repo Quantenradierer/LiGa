@@ -7,20 +7,20 @@
 </p>
 
 <p>
-  <strong>Servertyp:</strong>
-  <%= @game.servername %>
+  <strong>Gameserver:</strong>
+  <%= @game.gameserver %>
 </p>
 
 <p>
   <strong>Output:</strong>
-  <% @game.output.lines do |line| %>
+  <% @output.lines do |line| %>
     <br/><%= line %>
   <% end %>
 </p>
 
 <p>
   <strong>Aktuelle Konsolenausgabe:</strong>
-  <% @log.lines do |line| %>
+  <% @game.last_logs.lines do |line| %>
       <br/><%= line %>
   <% end %>
 </p>
@@ -30,5 +30,5 @@
 <% end %>
 
 <%= form_with scope: :game, url: stop_game_path, local: true do |form| %>
-  <%= submit_tag("Stop Server") %>
+    <%= submit_tag("Stop Server") %>
 <% end %>

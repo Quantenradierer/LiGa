@@ -2,8 +2,8 @@ class CreateGames < ActiveRecord::Migration[5.1]
   def change
     create_table :games do |t|
       t.string :title
-      t.string :servername
-      t.string :location
+      t.string :gameserver
+      t.string :name
       t.string :path
       t.text :output
 
