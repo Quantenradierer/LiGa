@@ -1,6 +1,7 @@
 class Game < ApplicationRecord
   has_many :game_manager_assignments
   has_many :users, through: :game_manager_assignments
+  has_many :gamelogs
 
   validates :title, presence: true, length: { minimum: 5, maximum: 63 }, uniqueness: true
   validates :gameserver, presence: true, length: { minimum: 4, maximum: 63 },
@@ -28,7 +29,7 @@ class Game < ApplicationRecord
   end
 
   def available_logs
-    Dir[File.join(log_path, name) + '*.log']
+    return Dir[File.join(log_path, name) + '*.log']
   end
 
 

@@ -19,11 +19,22 @@
 </p>
 
 <p>
-  <strong>Aktuelle Konsolenausgabe:</strong>
+  <strong>Aktuelles Log:</strong>
   <% @game.last_logs.lines do |line| %>
       <br/><%= line %>
   <% end %>
 </p>
+
+<p>
+  <strong>Verfügbare Logs:</strong>
+  <% @game.available_logs.each do |file| %>
+    <br/>
+      <%= link_to 'test', [@game, :gamelog]%>
+
+      <%= File.basename(file) %>
+  <% end %>
+</p>
+
 
 <%= form_with scope: :game, url: start_game_path, local: true do |form| %>
   <%= submit_tag("Start Server") %>
