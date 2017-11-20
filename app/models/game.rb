@@ -37,7 +37,7 @@ class Game < ApplicationRecord
   end
 
   def available_configs
-    return %w[server.properties banned-ips.json banned-players.json whitelist.json ops.json]
+    return %w[]
   end
 
 

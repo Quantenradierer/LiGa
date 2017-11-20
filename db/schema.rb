@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171119133717) do
+ActiveRecord::Schema.define(version: 20171120123241) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer "user_id"
@@ -41,6 +41,15 @@ ActiveRecord::Schema.define(version: 20171119133717) do
     t.string "name"
     t.string "path"
     t.text "output"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "gametypes", force: :cascade do |t|
+    t.string "name"
+    t.string "shortname"
+    t.text "description"
+    t.text "configs"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
