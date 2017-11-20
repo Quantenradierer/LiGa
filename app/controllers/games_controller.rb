@@ -60,13 +60,10 @@ class GamesController < ApplicationController
       return render 'new'
     end
 
-    games_path = '/home/quantenradierer/RubymineProjects/teslacoil/LinuxGSM'
-    lgsm_name = 'linuxgsm.sh'
     name = create_server_name
+    @game.update_attributes(name: name, path: File.join(GAMES_PATH, name))
 
-    @game.update_attributes(name: name, path: File.join(games_path, name))
-
-    @game.output = install_server(@game, File.join(games_path, lgsm_name))
+    @game.output = install_server(@game, File.join(GAMES_PATH, LGSM_NAME))
     if @game.save
       redirect_to @game
     else
