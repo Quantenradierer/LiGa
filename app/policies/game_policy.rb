@@ -3,6 +3,10 @@ class GamePolicy < ApplicationPolicy
     user.role? :admin
   end
 
+  def edit?
+    user.role? :admin
+  end
+
   def update?
     user.role? :admin
   end
@@ -12,6 +16,10 @@ class GamePolicy < ApplicationPolicy
   end
 
   def stop?
+    user.role? :admin
+  end
+
+  def show?
     user.role? :admin
   end
 
