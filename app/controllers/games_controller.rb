@@ -15,6 +15,24 @@ class GamesController < ApplicationController
     end
   end
 
+  def upgrade
+    @game = Game.find(params[:id])
+    authorize @game
+
+    @game.output = game_command(@game, 'update')
+    @game.save
+    redirect_to @game
+  end
+
+  def upgrade_lgsm
+    @game = Game.find(params[:id])
+    authorize @game
+
+    @game.output = game_command(@game, 'update-lgsm')
+    @game.save
+    redirect_to @game
+  end
+
   def start
     @game = Game.find(params[:id])
     authorize @game

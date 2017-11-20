@@ -11,6 +11,14 @@ class GamePolicy < ApplicationPolicy
     user.role? :admin
   end
 
+  def upgrade?
+    user.role? :admin
+  end
+
+  def upgrade_lgsm?
+    user.role? :admin
+  end
+
   def start?
     user.role? :admin
   end

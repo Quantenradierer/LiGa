@@ -2,7 +2,7 @@ require 'pty'
 
 module GamesHelper
   def create_server_name
-    [*('a'..'z'),*('0'..'9')].shuffle[0,16].join
+    'server-' + [*('a'..'z'),*('0'..'9')].shuffle[0, 6].join
   end
 
   def install_server(game, lgsm_path)
