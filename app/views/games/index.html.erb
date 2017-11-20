@@ -10,7 +10,7 @@
   <% @games.each do |game| %>
       <tr>
         <td><%= game.title %></td>
-        <td><%= game.gameserver %></td>
+        <td><%= game.gametype.name %></td>
         <td><%= link_to 'Show', game_path(game) %></td>
       </tr>
   <% end %>

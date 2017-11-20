@@ -4,8 +4,11 @@ class Game < ApplicationRecord
   has_many :gamelogs
 
   validates :title, presence: true, length: { minimum: 5, maximum: 63 }, uniqueness: true
-  validates :gameserver, presence: true, length: { minimum: 4, maximum: 63 },
-             acceptance: { accept: %w(mcserver arkserver)}
+  validates :gametype_id, presence: true
+
+  def gametype
+    Gametype.find(index=gametype_id)
+  end
 
   def log_path
     File.join(path, 'log', 'console')
@@ -37,7 +40,7 @@ class Game < ApplicationRecord
   end
 
   def available_configs
-    return %w[]
+    Gametype.find(index=gametype_id).configs.split
   end
 
 

@@ -5,6 +5,7 @@ class GamesController < ApplicationController
 
   def new
     @game = Game.new
+    @gametypes = Gametype.all
   end
 
   def index
@@ -33,6 +34,7 @@ class GamesController < ApplicationController
   end
 
   def create
+    new
     @game = Game.new(game_params)
     authorize @game
 
@@ -63,7 +65,7 @@ class GamesController < ApplicationController
 
   private
   def game_params
-    params.require(:game).permit(:title, :gameserver)
+    params.require(:game).permit(:title, :gametype_id)
   end
 
 end

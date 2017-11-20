@@ -18,7 +18,11 @@
 <p>
   <%= form.label :title %><br>
   <%= form.text_field :title %>
-  <%= form.select(:gameserver, options_for_select([['mcserver'], ['arkserver']])) %>
+  <%= form.select(:gametype_id) do %>
+    <% @gametypes.each do |gametype| %>
+      <%= content_tag(:option, gametype.name, value: gametype.id) %>
+    <% end %>
+  <% end %>
 </p>
 
 <p>

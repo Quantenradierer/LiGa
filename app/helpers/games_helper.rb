@@ -10,15 +10,15 @@ module GamesHelper
       raise ArgumentError('game path already exist')
     end
 
-    shortname = 'mc'
     manager = game.manager_file
+    gametype = game.gametype
 
     # TODO: improve this, maybe suggest a directory as optionally parameter for lgsm
     output = ''
     output += %x[ mkdir -p #{game.path} ]
     output += %x[ cp #{lgsm_path} #{manager} ]
-    output += %x[ sed -i -e s/shortname\\=\\"core\\"/shortname\\=\\"#{shortname}\\"/g #{manager} ]
-    output += %x[ sed -i -e s/gameservername\\=\\"core\\"/gameservername\\=\\"#{game.gameserver}\\"/g #{manager} ]
+    output += %x[ sed -i -e s/shortname\\=\\"core\\"/shortname\\=\\"#{gametype.shortname}\\"/g #{manager} ]
+    output += %x[ sed -i -e s/gameservername\\=\\"core\\"/gameservername\\=\\"#{gametype.name}\\"/g #{manager} ]
 
     output += game_command(game, 'auto-install')
 
