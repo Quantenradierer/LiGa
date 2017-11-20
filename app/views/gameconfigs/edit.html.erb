@@ -1,0 +1,8 @@
+<h1>Ändere <%= @config_name %> </h1>
+<%= form_with scope: :gameconfig, url: game_gameconfig_path, :method => :PUT, local: true do |form| %><p>
+  <%= form.text_area :config, value: @config, size: "80x50" %>
+</p>
+<p>
+  <%= submit_tag("Ändere Einstellung") %>
+</p>
+<% end %>

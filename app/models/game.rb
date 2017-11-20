@@ -11,6 +11,10 @@ class Game < ApplicationRecord
     File.join(path, 'log', 'console')
   end
 
+  def serverfiles_path
+    File.join(path, 'serverfiles')
+  end
+
   def config_file
     File.join(path, 'lgsm', 'config-lgsm', gameserver, name + '.cfg')
   end
@@ -30,6 +34,10 @@ class Game < ApplicationRecord
 
   def available_logs
     return Dir[File.join(log_path, name) + '*.log']
+  end
+
+  def available_configs
+    return %w[server.properties banned-ips.json banned-players.json whitelist.json ops.json]
   end
 
 

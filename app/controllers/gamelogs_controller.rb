@@ -1,7 +1,6 @@
 class GamelogsController < ApplicationController
 
   def new
-    print params
   end
 
   def show
@@ -9,9 +8,8 @@ class GamelogsController < ApplicationController
     authorize game
     @log_name = params[:id]
 
-    File.open(File.join(game.log_path, @log_name + '.log')) do |handle|
+    File.open(File.join(game.log_path, @log_name)) do |handle|
       @log = handle.readlines.join
     end
   end
-
 end

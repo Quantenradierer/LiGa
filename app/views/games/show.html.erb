@@ -12,6 +12,14 @@
 </p>
 
 <p>
+  <strong>Verfügbare Einstellungen:</strong>
+  <% @game.available_configs.each do |file| %>
+      <br/>
+      <%= link_to File.basename(file), edit_game_gameconfig_path(@game, File.basename(file))%>
+  <% end %>
+</p>
+
+<p>
   <strong>Output:</strong>
   <% @output.lines do |line| %>
     <br/><%= line %>
