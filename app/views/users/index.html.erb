@@ -1,0 +1,19 @@
+
+<h1>Listing all users</h1>
+
+<table>
+  <tr>
+    <th>E-Mail</th>
+  </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= link_to user.email, user_path(user) %></td>
+    </tr>
+  <% end %>
+</table>
+
+
+<%= form_with scope: :user,  method: :get, url: new_user_path, local: true do |form| %>
+  <%= submit_tag('New User') %>
+<% end %>

@@ -11,6 +11,14 @@ class GamePolicy < ApplicationPolicy
     user.role? :admin
   end
 
+  def show?
+    user.role? :admin
+  end
+
+  def index?
+    user.role? :admin
+  end
+
   def upgrade?
     user.role? :admin
   end
@@ -24,14 +32,6 @@ class GamePolicy < ApplicationPolicy
   end
 
   def stop?
-    user.role? :admin
-  end
-
-  def show?
-    user.role? :admin
-  end
-
-  def index?
     user.role? :admin
   end
 end

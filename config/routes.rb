@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
+  resources :users
   resources :games do
     resources :gamelogs, only: :show, id: /[^\/]+/
     resources :gameconfigs, only: [:edit, :update], id: /[^\/]+/

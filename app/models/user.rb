@@ -16,5 +16,4 @@ class User < ApplicationRecord
   def role?(role)
     roles.any? { |r| r.name.underscore.to_sym == role }
   end
-
 end
