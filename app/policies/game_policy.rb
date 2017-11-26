@@ -29,6 +29,10 @@ class GamePolicy < ApplicationPolicy
     user.role? :admin
   end
 
+  def logs?
+    user.role? :admin
+  end
+
   def upgrade?
     user.role? :admin
   end
