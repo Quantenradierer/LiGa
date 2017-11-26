@@ -26,8 +26,9 @@ ActiveRecord::Schema.define(version: 20171126005527) do
     t.integer "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "rights"
+    t.integer "rights", default: 1
     t.index ["game_id"], name: "index_game_manager_assignments_on_game_id"
+    t.index ["user_id", "game_id"], name: "index_game_manager_assignments_on_user_id_and_game_id", unique: true
     t.index ["user_id"], name: "index_game_manager_assignments_on_user_id"
   end
 

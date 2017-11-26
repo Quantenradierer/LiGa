@@ -1,4 +1,13 @@
 class GameManagerAssignmentsController < ApplicationController
+  def new
+  end
+
+  def create
+    gm_assignment = authorize GameManagerAssignment.new(gm_assignment_params)
+    gm_assignment.save
+    redirect_to gm_assignment.user
+  end
+
   def update
     gm_assignment = GameManagerAssignment.find(params[:id])
     game = gm_assignment.game
@@ -19,5 +28,10 @@ class GameManagerAssignmentsController < ApplicationController
     gm_assignment.save
 
     redirect_to user
+  end
+
+  private
+  def gm_assignment_params
+    params.require(:game_manager_assignments).permit(:user_id, :game_id)
   end
 end

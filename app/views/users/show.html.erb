@@ -28,3 +28,13 @@
     <% end %>
   <% end %>
 </table>
+
+<%= form_with scope: :game_manager_assignments, url: game_manager_assignments_path, local: true do |form| %>
+<%= form.hidden_field(:user_id, :value => @user.id) %>
+  <%= form.select(:game_id) do %>
+  <% @games.each do |game| %>
+    <%= content_tag(:option, game.title, value: game.id) %>
+  <% end %>
+<% end %>
+<%= form.submit "Zu Gameserver hinzufügen" %>
+<% end %>
