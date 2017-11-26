@@ -9,10 +9,7 @@ class GamesController < ApplicationController
   end
 
   def index
-    games = Game.all
-    @games = games.select do |elem|
-      authorize elem
-    end
+    @games = policy_scope(Game)
   end
 
   def upgrade

@@ -4,7 +4,11 @@
   <p>
     Eingeloggt als: <%= current_user.email %>
     <%= link_to "Log out", logout_path, method: :delete %>
+    <br/>
     <%= link_to 'Serverlist', controller: 'games' %>
+    <br/>
+    <%= link_to 'Userlist', controller: 'users' %>
+    <br/>
   </p>
 <% else %>
   <p>

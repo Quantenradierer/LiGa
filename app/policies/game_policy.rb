@@ -1,4 +1,14 @@
 class GamePolicy < ApplicationPolicy
+  class Scope < Scope
+    def resolve
+      if user.role? :admin
+        scope.all
+      else
+        GameManagerAssignment.where(user=user)
+      end
+    end
+  end
+
   def create?
     user.role? :admin
   end
