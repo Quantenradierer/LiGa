@@ -27,13 +27,6 @@
 </p>
 
 <p>
-  <strong>Aktuelles Log:</strong>
-  <% @game.last_logs.lines do |line| %>
-      <br/><%= line %>
-  <% end %>
-</p>
-
-<p>
   <strong>Verfügbare Logs:</strong>
   <% @game.available_logs.each do |file| %>
     <br/>
