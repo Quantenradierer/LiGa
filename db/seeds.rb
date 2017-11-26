@@ -84,3 +84,16 @@ possible_types = [
 possible_types.each do |shortname, name, description, configs|
   Gametype.create(shortname: shortname, name:name, description:description, configs:configs)
 end
+
+admin_role = Role.create(name: 'admin')
+
+puts 'Creating default user'
+
+password = [*('a'..'z'), *('A'..'Z'), *('0'..'9')].shuffle[0, 16].join
+admin = User.create(email: 'admin', password: password)
+Assignment.create(user: admin, role: admin_role)
+
+puts 'User: admin'
+puts "Password: #{password}"
+puts 'SAVE THIS PASSWORD!!!'
+
