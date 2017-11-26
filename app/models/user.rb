@@ -16,4 +16,8 @@ class User < ApplicationRecord
   def role?(role)
     roles.any? { |r| r.name.underscore.to_sym == role }
   end
+
+  def gm_assignments
+    GameManagerAssignment.where(user: id)
+  end
 end

@@ -1,0 +1,2 @@
+module GameManagerAssignmentsHelper
+end

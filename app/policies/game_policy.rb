@@ -10,51 +10,71 @@ class GamePolicy < ApplicationPolicy
   end
 
   def create?
-    user.role? :admin or has_right (__method__)
-
-  end
-
-  def edit?
-    user.role? :admin or has_right (__method__)
-  end
-
-  def update?
-    user.role? :admin or has_right (__method__)
-  end
-
-  def show?
-    user.role? :admin or has_right (__method__)
+    user.role? :admin
   end
 
   def index?
     show?
   end
 
-  def logs?
-    user.role? :admin or has_right (__method__)
+  def show?
+    has_right (__method__)
+  end
+
+  def edit?
+    has_right (__method__)
+  end
+
+  def update?
+    has_right (__method__)
   end
 
   def upgrade?
-    user.role? :admin or has_right (__method__)
+    has_right (__method__)
   end
 
   def upgrade_lgsm?
-    user.role? :admin or has_right (__method__)
+    has_right (__method__)
   end
 
   def start?
-    user.role? :admin or has_right (__method__)
+    has_right (__method__)
   end
 
   def stop?
-    user.role? :admin or has_right (__method__)
+    has_right (__method__)
+  end
+
+  def console?
+    has_right (__method__)
+  end
+
+  def backup?
+    has_right (__method__)
+  end
+
+  def logs?
+    has_right (__method__)
+  end
+
+  def edit_config_low?
+    has_right (__method__)
+  end
+
+  def edit_config_medium?
+    has_right (__method__)
+  end
+
+  def edit_config_high?
+    has_right (__method__)
   end
 
   private
   def has_right method
-    GameManagerAssignment.where(user: user, game: record).each do |assignment|
+    @gm_assignment ||= GameManagerAssignment.where(user: user, game: record)
+    @gm_assignment.each do |assignment|
       return true if assignment.has_right?(method)
     end
-    false
+    user.role? :admin
   end
 end

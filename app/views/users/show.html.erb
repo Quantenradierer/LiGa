@@ -4,3 +4,27 @@
   <strong>E-Mail:</strong>
   <%= @user.email %>
 </p>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Gameserver</th>
+    <% RIGHTS.each do |name, _| %>
+    <th><%= name %></th>
+    <% end %>
+    <th>Speichern</th>
+  </tr>
+
+  <% @user.gm_assignments.each do |gm| %>
+    <%= form_with scope: :game_manager_assignments, :method => :PUT, url: game_manager_assignment_path(gm.id), local: true do |form| %>
+      <tr>
+        <td><%= gm.game.title %></td>
+        <td><%= gm.game.gametype.name %></td>
+        <% RIGHTS.each do |name, _| %>
+            <th><%= form.check_box name, {checked: gm.has_right?(name)} %></th>
+        <% end %>
+        <td><%= form.submit %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
