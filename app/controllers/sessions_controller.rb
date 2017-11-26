@@ -10,7 +10,11 @@ class SessionsController < ApplicationController
       redirect_to dashboard_index_url
     else
       # Create an error message.
-      print user.errors
+      unless user.nil?
+        user.errors.each do |error|
+          put error
+        end
+      end
       render 'new'
     end
   end
