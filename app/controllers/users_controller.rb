@@ -4,17 +4,15 @@ class UsersController < ApplicationController
   include GamesHelper
 
   def new
-    @user = User.new
+    @user = authorize User.new
   end
 
   def index
-    @users = User.all
-    authorize @users
+    @users = policy_scope(User)
   end
 
   def create
-    @user = User.new(user_params)
-    authorize @user
+    @user = authorize User.new(user_params)
 
     if @user.save
       redirect_to @user
@@ -24,8 +22,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    authorize @user
+    @user = authorize User.find(params[:id])
   end
 
   private

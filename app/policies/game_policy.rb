@@ -4,7 +4,7 @@ class GamePolicy < ApplicationPolicy
       if user.role? :admin
         scope.all
       else
-        GameManagerAssignment.where(user=user)
+        scope.all #GameManagerAssignment.where(user=user).comprehend(|assignment.game| )
       end
     end
   end

@@ -1,4 +1,14 @@
 class UserPolicy < ApplicationPolicy
+  class Scope < Scope
+    def resolve
+      if user.role? :admin
+        scope.all
+      else
+        scope.none
+      end
+    end
+  end
+
   def create?
     user.role? :admin
   end

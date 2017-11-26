@@ -4,8 +4,7 @@ class GameconfigsController < ApplicationController
   end
 
   def edit
-    game = Game.find(params[:game_id])
-    authorize game
+    game = authorize Game.find(params[:game_id])
     @config_name = params[:id]
 
     File.open(File.join(game.serverfiles_path, @config_name)) do |handle|
@@ -14,8 +13,7 @@ class GameconfigsController < ApplicationController
   end
 
   def update
-    game = Game.find(params[:game_id])
-    authorize game
+    game = authorize Game.find(params[:game_id])
     @config_name = params[:id]
 
     config = params[:gameconfig][:config]

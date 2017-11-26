@@ -30,7 +30,10 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'pundit'
+# the 1.1.0 in the gem repo is not the same as on github
+gem 'pundit', '1.1.0', :git => 'https://github.com/elabs/pundit.git'
+
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

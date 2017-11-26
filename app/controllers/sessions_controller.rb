@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
       redirect_to dashboard_index_url
     else
       # Create an error message.
+      print user.errors
       render 'new'
     end
   end

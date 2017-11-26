@@ -4,8 +4,7 @@ class GamelogsController < ApplicationController
   end
 
   def show
-    game = Game.find(params[:game_id])
-    authorize game
+    game = authorize Game.find(params[:game_id]), :logs
     @log_name = params[:id]
 
     File.open(File.join(game.log_path, @log_name)) do |handle|
