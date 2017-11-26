@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   include GamesHelper
 
   def new
-    @game = Game.new
+    @game = authorize Game.new
     @gametypes = Gametype.all
   end
 
@@ -13,8 +13,7 @@ class GamesController < ApplicationController
   end
 
   def upgrade
-    @game = Game.find(params[:id])
-    authorize @game
+    @game = authorize Game.find(params[:id])
 
     @game.output = game_command(@game, 'update')
     @game.save
@@ -22,8 +21,7 @@ class GamesController < ApplicationController
   end
 
   def upgrade_lgsm
-    @game = Game.find(params[:id])
-    authorize @game
+    @game = authorize Game.find(params[:id])
 
     @game.output = game_command(@game, 'update-lgsm')
     @game.save
@@ -31,8 +29,7 @@ class GamesController < ApplicationController
   end
 
   def start
-    @game = Game.find(params[:id])
-    authorize @game
+    @game = authorize Game.find(params[:id])
 
     @game.output = game_command(@game, 'start')
     @game.save
@@ -40,8 +37,7 @@ class GamesController < ApplicationController
   end
 
   def stop
-    @game = Game.find(params[:id])
-    authorize @game
+    @game = authorize Game.find(params[:id])
 
     @game.output = game_command(@game, 'stop')
     @game.save
@@ -49,9 +45,8 @@ class GamesController < ApplicationController
   end
 
   def create
-    new
-    @game = Game.new(game_params)
-    authorize @game
+    @game = authorize Game.new(game_params)
+    @gametypes = Gametype.all
 
     if not @game.valid?
       return render 'new'
@@ -69,9 +64,7 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find(params[:id])
-    authorize @game
-
+    @game = authorize Game.find(params[:id])
     @output ||= @game.output
   end
 
