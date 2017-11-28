@@ -9,14 +9,16 @@
 
   <% @games.each do |game| %>
       <tr>
-        <td><%= game.title %></td>
+        <td><%= link_to game.title, game_path(game) %></td>
         <td><%= game.gametype.name %></td>
-        <td><%= link_to 'Show', game_path(game) %></td>
+        <td><%= link_to 'DELETE', game_path(game), method: :delete %></td>
       </tr>
   <% end %>
 </table>
 
 
-<%= form_with scope: :game,  method: :get, url: new_game_path, local: true do |form| %>
-    <%= submit_tag('New Server') %>
+<% if policy(Game.new).create? %>
+  <%= form_with scope: :game,  method: :get, url: new_game_path, local: true do |form| %>
+      <%= submit_tag('New Server') %>
+  <% end %>
 <% end %>

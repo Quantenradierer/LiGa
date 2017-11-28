@@ -34,4 +34,9 @@ module GamesHelper
       end
     end
   end
+
+  def command(cmd)
+    print cmd
+    %x[ #{cmd} ]
+  end
 end

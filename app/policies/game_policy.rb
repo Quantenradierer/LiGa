@@ -21,6 +21,10 @@ class GamePolicy < ApplicationPolicy
     has_right (__method__)
   end
 
+  def destroy?
+    has_right (__method__)
+  end
+
   def edit?
     has_right (__method__)
   end

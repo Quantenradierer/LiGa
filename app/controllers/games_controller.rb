@@ -68,6 +68,15 @@ class GamesController < ApplicationController
     @output ||= @game.output
   end
 
+  def destroy
+    @game = authorize Game.find(params[:id])
+    game_command(@game, 'stop')
+
+    command("mv #{@game.path} #{DELETED_PATH}")
+    @game.destroy
+    redirect_to games_path
+  end
+
   private
   def game_params
     params.require(:game).permit(:title, :gametype_id)
