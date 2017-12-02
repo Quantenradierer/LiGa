@@ -14,33 +14,33 @@ class GamesController < ApplicationController
 
   def upgrade
     @game = authorize Game.find(params[:id])
-
-    @game.output = game_command(@game, 'update')
-    @game.save
+    UpgradeWorker.perform_later(
+      CommandJob.create(user_id: current_user.id, game_id: @game.id, worker: UpgradeWorker)
+    )
     redirect_to @game
   end
 
   def upgrade_lgsm
     @game = authorize Game.find(params[:id])
-
-    @game.output = game_command(@game, 'update-lgsm')
-    @game.save
+    UpgradeLgsmWorker.perform_later(
+      CommandJob.create(user_id: current_user.id, game_id: @game.id, worker: UpgradeLgsmWorker)
+    )
     redirect_to @game
   end
 
   def start
     @game = authorize Game.find(params[:id])
-
-    @game.output = game_command(@game, 'start')
-    @game.save
+    StartWorker.perform_later(
+      CommandJob.create(user_id: current_user.id, game_id: @game.id, worker: StartWorker)
+    )
     redirect_to @game
   end
 
   def stop
     @game = authorize Game.find(params[:id])
-
-    @game.output = game_command(@game, 'stop')
-    @game.save
+    StopWorker.perform_later(
+      CommandJob.create(user_id: current_user.id, game_id: @game.id, worker: StopWorker)
+    )
     redirect_to @game
   end
 
@@ -48,15 +48,13 @@ class GamesController < ApplicationController
     @game = authorize Game.new(game_params)
     @gametypes = Gametype.all
 
-    if not @game.valid?
-      return render 'new'
-    end
-
     name = create_server_name
     @game.update_attributes(name: name, path: File.join(GAMES_PATH, name))
 
-    @game.output = install_server(@game, File.join(GAMES_PATH, LGSM_NAME))
     if @game.save
+      InstallWorker.perform_later(
+        CommandJob.create(user_id: current_user.id, game_id: @game.id, worker: InstallWorker)
+      )
       redirect_to @game
     else
       render 'new'
@@ -69,11 +67,10 @@ class GamesController < ApplicationController
   end
 
   def destroy
-    @game = authorize Game.find(params[:id])
-    game_command(@game, 'stop')
-
-    command("mv #{@game.path} #{DELETED_PATH}")
-    @game.destroy
+    game = authorize Game.find(params[:id])
+    DeleteWorker.perform_later(
+        CommandJob.create(user_id: current_user.id, game_id: game.id, worker: DeleteWorker)
+    )
     redirect_to games_path
   end
 
@@ -81,5 +78,4 @@ class GamesController < ApplicationController
   def game_params
     params.require(:game).permit(:title, :gametype_id)
   end
-
 end

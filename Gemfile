@@ -33,6 +33,7 @@ gem 'bcrypt', '~> 3.1.7'
 # the 1.1.0 in the gem repo is not the same as on github
 gem 'pundit', '1.1.0', :git => 'https://github.com/elabs/pundit.git'
 
+gem 'sidekiq', '5.0.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

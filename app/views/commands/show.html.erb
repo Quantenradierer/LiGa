@@ -1,0 +1,18 @@
+<h1><%= @command.worker %></h1>
+
+
+<p>
+  <strong>Ausgelöst von: <%= @command.user.email %> </strong>
+</p>
+
+<p>
+  <strong>Uhrzeit: <%= @command.created_at %> </strong>
+</p>
+
+<p>
+  <strong>Output: </strong><br/>
+  <%= @command.output.lines do |line| %>
+    <br/><%= line.dup.force_encoding("UTF-8") %>
+  <% end %>
+</p>
+

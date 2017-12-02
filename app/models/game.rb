@@ -43,5 +43,7 @@ class Game < ApplicationRecord
     Gametype.find(index=gametype_id).configs.split
   end
 
-
+  def commands
+    CommandJob.where(game_id: id).order(created_at: :desc)
+  end
 end

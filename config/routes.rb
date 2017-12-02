@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
 
   resources :users
+  resources :commands
   resources :game_manager_assignments, only: [:update, :create]
   resources :games do
     resources :gamelogs, only: :show, id: /[^\/]+/
