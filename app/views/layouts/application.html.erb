@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="app/assets/stylesheets/application.scss"/>
     <title>Liga</title>
     <%= csrf_meta_tags %>
 
@@ -9,6 +10,40 @@
   </head>
 
   <body>
-    <%= yield %>
+
+    <div>
+      <div class="spacer_menuitem"></div>
+      <div class="menuitem">
+        <%= link_to t('dashboard.name'), dashboard_index_path %>
+      </div>
+      <div class="menuitem">
+        <%= link_to t('games.gameslist'), games_path %>
+      </div>
+      <div class="menuitem">
+        <%= t('free_slot') %>
+      </div>
+      <div class="menuitem">
+        <%= link_to t('rights.right_management'), users_path %>
+      </div>
+      <div class="menuitem">
+        <% if logged_in? %>
+          <h4><%= link_to current_user, current_user %></h4>
+          <%= link_to t('session.logout'), logout_path, method: :delete %>
+        <% end %>
+      </div>
+      <div class="spacer_menuitem"></div>
+    </div>
+
+    <div>
+      <div style="display: inline-block; width: 10%"></div>
+      <div style="display: inline-block; width: 80%">
+        <%= yield %>
+      </div>
+      <div style="display: inline-block; width: 10%"></div>
+    </div>
+
+    <div>
+      <div>Icons made by <a href="https://www.flaticon.com/authors/chanut-is-industries" title="Chanut is Industries">Chanut is Industries</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    </div>
   </body>
 </html>

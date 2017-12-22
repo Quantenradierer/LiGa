@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   before_save { self.email = email.downcase }
-  validates :email, presence: true,
+  validates :email,
+            presence: true,
             length: { minimum: 5, maximum: 127 },
             uniqueness: true
   validates :password, presence: true, length: { minimum: 8 }
@@ -19,5 +20,13 @@ class User < ApplicationRecord
 
   def gm_assignments
     GameManagerAssignment.where(user: id)
+  end
+
+  def authenticated
+    true
+  end
+
+  def to_s
+    email
   end
 end

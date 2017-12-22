@@ -3,6 +3,8 @@ require_relative '../helpers/games_helper'
 class GamesController < ApplicationController
   include GamesHelper
 
+  before_action { authenticate! }
+
   def new
     @game = authorize Game.new
     @gametypes = Gametype.all

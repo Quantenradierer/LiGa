@@ -1,6 +1,7 @@
 class GameManagerAssignmentsController < ApplicationController
-  def new
-  end
+  before_action { authenticate! }
+
+  def new; end
 
   def create
     gm_assignment = authorize GameManagerAssignment.new(gm_assignment_params)
