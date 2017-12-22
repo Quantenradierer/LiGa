@@ -3,6 +3,8 @@ require_relative '../helpers/users_helper'
 class UsersController < ApplicationController
   include GamesHelper
 
+  before_action { authenticate! }
+
   def new
     @user = authorize User.new
   end

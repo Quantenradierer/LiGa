@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+.menuitem {
+    display: inline-block;
+    width: 16%;
+}
+
+.spacer_menuitem {
+  display: inline-block;
+  width: 10%;
+}

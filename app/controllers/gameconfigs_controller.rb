@@ -1,7 +1,7 @@
 class GameconfigsController < ApplicationController
+  before_action { authenticate! }
 
-  def new
-  end
+  def new; end
 
   def edit
     game = authorize Game.find(params[:game_id])

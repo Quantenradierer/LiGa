@@ -1,0 +1,11 @@
+
+de:
+  dashboard:
+    name: "Dashboard"
+  session:
+    login: "Einloggen"
+    logout: "Ausloggen"
+  games:
+    gameslist: 'Serverliste'
+  rights:
+    right_management: 'Rechteverwaltung'

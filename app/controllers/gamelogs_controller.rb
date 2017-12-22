@@ -1,7 +1,7 @@
 class GamelogsController < ApplicationController
+  before_action { authenticate! }
 
-  def new
-  end
+  def new; end
 
   def show
     game = authorize Game.find(params[:game_id]), :logs?
