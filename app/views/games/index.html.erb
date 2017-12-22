@@ -1,24 +1,30 @@
+<div class="content_header">
+  <h2><%= t('games.game_server_list') %></h2>
+</div>
 
-<h1>Listing game servers</h1>
+<div class="content">
+  <table>
+    <tr>
+      <th><%= t('games.online') %></th>
+      <th><%= t('games.title') %></th>
+      <th><%= t('games.server') %></th>
+      <th><%= t('games.player_amount') %></th>
+    </tr>
 
-<table>
-  <tr>
-    <th><%= t('games.title')%></th>
-    <th>Gameserver</th>
-  </tr>
-
-  <% @games.each do |game| %>
+    <% @games.each do |game| %>
       <tr>
+        <td>-</td>
         <td><%= link_to game.title, game_path(game) %></td>
         <td><%= game.gametype.name %></td>
-        <td><%= link_to 'DELETE', game_path(game), method: :delete %></td>
+        <td>0/0</td>
       </tr>
-  <% end %>
-</table>
+    <% end %>
+  </table>
 
 
-<% if policy(Game.new).create? %>
-  <%= form_with scope: :game,  method: :get, url: new_game_path, local: true do |form| %>
-      <%= submit_tag('New Server') %>
+  <% if policy(Game.new).create? %>
+    <%= form_with scope: :game,  method: :get, url: new_game_path, local: true do |form| %>
+      <%= submit_tag(t('games.new_server')) %>
+    <% end %>
   <% end %>
-<% end %>
+</div>

@@ -1,18 +1,22 @@
-<h1><%= @command.worker %></h1>
+<div class="content_header">
+  <h2><%= @command.worker %></h2>
+</div>
 
+<div class="content">
+  <p>
+    <strong><%= t('command.executed_by', name: @command.user) %></strong>
+  </p>
 
-<p>
-  <strong>Ausgelöst von: <%= @command.user.email %> </strong>
-</p>
+  <p>
+    <strong><%= t('command.executed_at', date: l(@command.created_at.localtime)) %></strong>
+  </p>
 
-<p>
-  <strong>Uhrzeit: <%= @command.created_at %> </strong>
-</p>
-
-<p>
-  <strong>Output: </strong><br/>
-  <% linessplit(@command.output) do |line| %>
-    <%= line %><br/>
-  <% end %>
-</p>
-
+  <p>
+    <strong><%= t('command.output') %></strong><br/>
+    <div>
+      <% linessplit(@command.output) do |line| %>
+        <%= line %><br/>
+      <% end %>
+    </div>
+  </p>
+</div>

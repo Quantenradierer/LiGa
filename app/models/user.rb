@@ -18,10 +18,6 @@ class User < ApplicationRecord
     roles.any? { |r| r.name.underscore.to_sym == role }
   end
 
-  def gm_assignments
-    GameManagerAssignment.where(user: id)
-  end
-
   def authenticated
     true
   end

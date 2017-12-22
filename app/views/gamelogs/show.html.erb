@@ -1,6 +1,12 @@
-<p>
-  <strong><%= @log_name %></strong>
-  <% @log.lines do |line| %>
-      <br/><%= line.dup.force_encoding("UTF-8") %>
-  <% end %>
-</p>
+<div class="content_header">
+  <h2><%= @config_name %> </h2>
+</div>
+
+<div class="content">
+  <p>
+    <strong><%= @log_name %></strong>
+    <% @log.lines do |line| %>
+        <br/><%= line.dup.force_encoding("UTF-8") %>
+    <% end %>
+  </p>
+</div>

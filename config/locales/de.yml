@@ -7,5 +7,34 @@ de:
     logout: "Ausloggen"
   games:
     gameslist: 'Serverliste'
+    title: 'Name'
+    server: 'Server'
+    new_server: 'Neuer Server'
+    create_server: 'Erstelle Server'
+    game_server_list: 'Serverliste'
+    online: 'Online'
+    player_amount: 'Spieleranzahl'
   rights:
     right_management: 'Rechteverwaltung'
+  user:
+    email: 'E-Mail'
+    server_access: 'Zugriff auf Server'
+  command:
+    executed_by: "Ausgelöst von %{name}"
+    executed_at: "Ausgelöst am %{date}"
+
+    types:
+      start: 'Starten'
+      stop: 'Stoppen'
+      settings: 'Einstellungen'
+      backup: 'Backup'
+      upgrade: 'Update'
+      upgrade_lgsm: 'Manager Updaten'
+      console: 'Konsole'
+      delete: 'Löschen'
+
+  gameconfig:
+    edit: "Einstellung ändern"
+  time:
+    formats:
+      default: "%d.%m.%Y, %H:%M"

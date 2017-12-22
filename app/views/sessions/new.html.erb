@@ -1,8 +1,8 @@
 <% provide(:title, "Log in") %>
-<div style="text-align: center">
-  <h1><%= t('session.login') %></h1>
+<div class="content_header">
+  <h2><%= t('session.login') %></h2>
 </div>
-<div style="text-align: center">
+<div class="content">
   <div style="text-align: left">
     <%= form_for(:session, url: login_path) do |f| %>
 

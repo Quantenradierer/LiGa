@@ -1,53 +1,98 @@
-<h1>Game Server</h1>
+<div class="content_header">
+  <h2>Game Server</h2>
+</div>
 
+<div class="content">
+  <table>
+    <tr>
+      <th><%= t('games.online') %></th>
+      <th><%= t('games.title') %></th>
+      <th><%= t('games.server') %></th>
+      <th><%= t('games.player_amount') %></th>
+    </tr>
+    <tr>
+      <td>-</td>
+      <td><%= @game.title %></td>
+      <td><%= @game.gametype.name %></td>
+      <td>0/0</td>
+    </tr>
+  </table>
 
-<p>
-  <strong>Title:</strong>
-  <%= @game.title %>
-</p>
+  <div>
+    <div>
+      <div style="display: inline-block">
+        <%= form_with scope: :game, url: start_game_path, local: true do |form| %>
+          <%= submit_tag(t('command.types.start'), class: "cmd_btn") %>
+        <% end %>
+      </div>
 
-<p>
-  <strong>Gameserver:</strong>
-  <%= @game.gametype.name %>
-</p>
+      <div style="display: inline-block">
+        <%= form_with scope: :game, url: stop_game_path, local: true do |form| %>
+          <%= submit_tag(t('command.types.stop'), class: "cmd_btn") %>
+        <% end %>
+      </div>
 
-<p>
-  <strong>Letzte Befehle:</strong>
-  <% @game.commands.limit(10).each do |cmd| %>
+      <div style="display: inline-block">
+        <%= form_with scope: :game, url: upgrade_game_path, local: true do |form| %>
+          <%= submit_tag(t('command.types.upgrade'), class: "cmd_btn") %>
+        <% end %>
+      </div>
+    </div>
+    <div>
+      <div style="display: inline-block">
+        <%= form_with scope: :game, url: start_game_path, local: true do |form| %>
+          <%= submit_tag(t('command.types.settings'), class: "cmd_btn") %>
+        <% end %>
+      </div>
+
+      <div style="display: inline-block">
+        <%= form_with scope: :game, url: start_game_path, local: true do |form| %>
+          <%= submit_tag(t('command.types.backup'), class: "cmd_btn") %>
+        <% end %>
+      </div>
+    </div>
+    <div>
+      <div style="display: inline-block">
+        <%= form_with scope: :game, url: start_game_path, local: true do |form| %>
+          <%= submit_tag(t('command.types.console'), class: "cmd_btn") %>
+        <% end %>
+      </div>
+
+      <div style="display: inline-block">
+        <%= form_with scope: :game, url: upgrade_lgsm_game_path, local: true do |form| %>
+          <%= submit_tag(t('command.types.upgrade_lgsm'), class: "cmd_btn") %>
+        <% end %>
+      </div>
+
+      <div style="display: inline-block">
+        <%= form_with scope: :game, url: start_game_path, local: true do |form| %>
+          <%= submit_tag(t('command.types.delete'), class: "cmd_btn") %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <p>
+    <strong>Letzte Befehle:</strong>
+    <% @game.commands.limit(10).each do |cmd| %>
+        <br/>
+        <%= cmd.created_at %> <%= link_to cmd.worker, command_path(cmd) %>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Verfügbare Einstellungen:</strong>
+    <% @game.available_configs.each do |file| %>
+        <br/>
+        <%= link_to File.basename(file), edit_game_gameconfig_path(@game, File.basename(file))%>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Verfügbare Logs:</strong>
+    <% @game.available_logs.each do |file| %>
       <br/>
-      <%= cmd.created_at %> <%= link_to cmd.worker, command_path(cmd) %>
-  <% end %>
-</p>
-
-<p>
-  <strong>Verfügbare Einstellungen:</strong>
-  <% @game.available_configs.each do |file| %>
-      <br/>
-      <%= link_to File.basename(file), edit_game_gameconfig_path(@game, File.basename(file))%>
-  <% end %>
-</p>
-
-<p>
-  <strong>Verfügbare Logs:</strong>
-  <% @game.available_logs.each do |file| %>
-    <br/>
-      <%= link_to File.basename(file), game_gamelog_path(@game, File.basename(file))%>
-  <% end %>
-</p>
-
-
-<%= form_with scope: :game, url: start_game_path, local: true do |form| %>
-    <%= submit_tag("Start Server") %>
-<% end %>
-
-<%= form_with scope: :game, url: stop_game_path, local: true do |form| %>
-    <%= submit_tag("Stop Server") %>
-<% end %>
-
-<%= form_with scope: :game, url: upgrade_game_path, local: true do |form| %>
-    <%= submit_tag("Update Server") %>
-<% end %>
-
-<%= form_with scope: :game, url: upgrade_lgsm_game_path, local: true do |form| %>
-    <%= submit_tag("Update Manager") %>
-<% end %>
+        <%= link_to File.basename(file), game_gamelog_path(@game, File.basename(file))%>
+    <% end %>
+  </p>
+</div>
