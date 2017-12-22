@@ -1,40 +1,44 @@
-<h1><%= @user.email %></h1>
+<div class="content_header">
+  <h2><%= @user.email %></h2>
+</div>
 
-<p>
-  <strong>E-Mail:</strong>
-  <%= @user.email %>
-</p>
+<div class="content">
+  <p>
+    <strong><%= t('users.email') %></strong>
+    <%= @user.email %>
+  </p>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Gameserver</th>
-    <% RIGHTS.each do |name, _| %>
-    <th><%= name %></th>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Gameserver</th>
+      <% RIGHTS.each do |name, _| %>
+      <th><%= name %></th>
+      <% end %>
+      <th>Speichern</th>
+    </tr>
+
+    <% @user.game_manager_assignments.each do |gm| %>
+      <%= form_with scope: :game_manager_assignments, :method => :PUT, url: game_manager_assignment_path(gm.id), local: true do |form| %>
+        <tr>
+          <td><%= gm.game.title %></td>
+          <td><%= gm.game.gametype.name %></td>
+          <% RIGHTS.each do |name, _| %>
+              <th><%= form.check_box name, {checked: gm.has_right?(name)} %></th>
+          <% end %>
+          <td><%= form.submit %></td>
+        </tr>
+      <% end %>
     <% end %>
-    <th>Speichern</th>
-  </tr>
+  </table>
 
-  <% @user.gm_assignments.each do |gm| %>
-    <%= form_with scope: :game_manager_assignments, :method => :PUT, url: game_manager_assignment_path(gm.id), local: true do |form| %>
-      <tr>
-        <td><%= gm.game.title %></td>
-        <td><%= gm.game.gametype.name %></td>
-        <% RIGHTS.each do |name, _| %>
-            <th><%= form.check_box name, {checked: gm.has_right?(name)} %></th>
-        <% end %>
-        <td><%= form.submit %></td>
-      </tr>
+  <%= form_with scope: :game_manager_assignments, url: game_manager_assignments_path, local: true do |form| %>
+  <%= form.hidden_field(:user_id, :value => @user.id) %>
+    <%= form.select(:game_id) do %>
+    <% @games.each do |game| %>
+      <%= content_tag(:option, game.title, value: game.id) %>
     <% end %>
   <% end %>
-</table>
-
-<%= form_with scope: :game_manager_assignments, url: game_manager_assignments_path, local: true do |form| %>
-<%= form.hidden_field(:user_id, :value => @user.id) %>
-  <%= form.select(:game_id) do %>
-  <% @games.each do |game| %>
-    <%= content_tag(:option, game.title, value: game.id) %>
+  <%= form.submit "Zu Gameserver hinzufügen" %>
   <% end %>
-<% end %>
-<%= form.submit "Zu Gameserver hinzufügen" %>
-<% end %>
+</div>

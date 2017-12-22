@@ -22,3 +22,10 @@
   display: inline-block;
   width: 10%;
 }
+
+.content_header {
+  text-align: center
+}
+
+tr:nth-child(odd) {background: #FFFFFF}
+tr:nth-child(even) {background: #EEEEFF}

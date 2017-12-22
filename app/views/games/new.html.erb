@@ -1,31 +1,41 @@
-<h1>New Game Server</h1>
-<%= form_with scope: :game, url: games_path, local: true do |form| %>
+<div class="content_header">
+  <h2><%= t('games.new_server') %></h2>
+</div>
 
-<% if @game.errors.any? %>
-  <div id="error_explanation">
-    <h2>
-      <%= pluralize(@game.errors.count, "error") %> prohibited
-      this article from being saved:
-    </h2>
-    <ul>
-      <% @game.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<div class="content">
+  <%= form_with scope: :game, url: games_path, local: true do |form| %>
 
-<p>
-  <%= form.label :title %><br>
-  <%= form.text_field :title %>
-  <%= form.select(:gametype_id) do %>
-    <% @gametypes.each do |gametype| %>
-      <%= content_tag(:option, gametype.name, value: gametype.id) %>
-    <% end %>
+  <% if @game.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@game.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @game.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
-</p>
 
-<p>
-  <%= form.submit %>
-</p>
-<% end %>
+  <p>
+    <div>
+      <%= form.label t('games.title') %>
+      <%= form.text_field :title %>
+    </div>
+    <div>
+      <%= form.label t('games.server') %>
+      <%= form.select(:gametype_id) do %>
+        <% @gametypes.each do |gametype| %>
+          <%= content_tag(:option, gametype.name, value: gametype.id) %>
+        <% end %>
+      <% end %>
+    </div>
+  </p>
+
+  <p>
+    <%= form.submit t('games.create_server') %>
+  </p>
+  <% end %>
+</div>
