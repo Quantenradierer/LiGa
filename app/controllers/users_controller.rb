@@ -28,9 +28,22 @@ class UsersController < ApplicationController
     @games = policy_scope(Game)
   end
 
+  def change_password
+    params = password_params
+    raise Exception.new('TODO') unless params[:password] == params[:password_confirmation]
+    raise Exception.new('TODO') unless current_user.authenticate(params[:current_password])
+
+    current_user.update!(password: params[:password])
+    redirect_to current_user
+  end
+
   private
+
+  def password_params
+    params.require(:user).permit(:current_password, :password, :password_confirmation)
+  end
+
   def user_params
     params.require(:user).permit(:email, :password)
   end
-
 end

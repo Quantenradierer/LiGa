@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
-  resources :users
+  resources :users do
+    member do
+      post 'change_password'
+    end
+  end
   resources :commands
   resources :game_manager_assignments, only: [:update, :create]
   resources :games do
