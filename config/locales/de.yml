@@ -19,6 +19,10 @@ de:
   user:
     email: 'E-Mail'
     server_access: 'Zugriff auf Server'
+    password: 'Passwort'
+    current_password: 'Aktuelles Passwort'
+    password_confirmation: 'Passwort wiederholt'
+    change_password: 'Ändere Passwort'
   command:
     executed_by: "Ausgelöst von %{name}"
     executed_at: "Ausgelöst am %{date}"
