@@ -14,6 +14,8 @@ class AssignmentsController < ApplicationController
     assignment = Assignment.find(params[:id])
     game = assignment.game
     user = assignment.user
+
+    params = rights_params
     RIGHTS.each do |right, flag|
       begin
         authorize game, right
@@ -21,7 +23,7 @@ class AssignmentsController < ApplicationController
         next
       end
       name = right.to_s.chomp('?')
-      if params[:assignments][name] == '1'
+      if params[name] == '1'
         assignment.rights |= flag
       else
         assignment.rights ^= assignment.rights & flag
@@ -33,7 +35,12 @@ class AssignmentsController < ApplicationController
   end
 
   private
+
   def assignment_params
-    params.require(:assignments).permit(:user_id, :game_id)
+    params.require(:assignment).permit(:user_id, :game_id)
+  end
+
+  def rights_params
+    params.require(:assignment)
   end
 end

@@ -1,10 +1,4 @@
 class CommandJob < ApplicationRecord
-
-  def game
-    Game.find( game_id)
-  end
-
-  def user
-    User.find( id=user_id)
-  end
+  belong_to :user
+  belongs_to :game
 end

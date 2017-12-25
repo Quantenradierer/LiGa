@@ -73,6 +73,10 @@ class GamePolicy < ApplicationPolicy
     has_right (__method__)
   end
 
+  def rights?
+    has_right(__method__)
+  end
+
   private
   def has_right(method)
     @assignment ||= Assignment.where(user: user, game: record)

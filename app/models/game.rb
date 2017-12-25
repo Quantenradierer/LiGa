@@ -1,7 +1,6 @@
 class Game < ApplicationRecord
   has_many :assignments
   has_many :users, through: :assignments
-  has_many :gamelogs
 
   validates :title, presence: true, length: { minimum: 5, maximum: 63 }, uniqueness: true
   validates :gametype_id, presence: true

@@ -38,13 +38,13 @@
       <th>Speichern</th>
     </tr>
 
-    <% @user.assignments.each do |gm| %>
-      <%= form_with scope: :assignments, :method => :PUT, url: assignment_path(gm.id), local: true do |form| %>
+    <% @user.assignments.each do |assignment| %>
+      <%= form_with scope: :assignment, :method => :PUT, url: assignment_path(assignment.id), local: true do |form| %>
         <tr>
-          <td><%= gm.game.title %></td>
-          <td><%= gm.game.gametype.name %></td>
+          <td><%= assignment.game.title %></td>
+          <td><%= assignment.game.gametype.name %></td>
           <% RIGHTS.each do |name, _| %>
-              <th><%= form.check_box name, {checked: gm.has_right?(name)} %></th>
+              <th><%= form.check_box name, {checked: assignment.has_right?(name)} %></th>
           <% end %>
           <td><%= form.submit %></td>
         </tr>
@@ -52,7 +52,7 @@
     <% end %>
   </table>
 
-  <%= form_with scope: :assignments, url: assignments_path, local: true do |form| %>
+  <%= form_with scope: :assignment, url: assignments_path, local: true do |form| %>
     <%= form.hidden_field(:user_id, :value => @user.id) %>
       <%= form.select(:game_id) do %>
       <% @games.each do |game| %>
