@@ -11,7 +11,7 @@
   <% @users.each do |user| %>
     <tr>
       <td><%= link_to user.email, user_path(user) %></td>
-      <td><%= user.game_manager_assignments.where('rights > 0').count %></td>
+      <td><%= user.assignments.where('rights > 0').count %></td>
     </tr>
   <% end %>
 </table>

@@ -1,16 +1,16 @@
 class GamePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.role? :admin
+      if user.is_admin?
         scope.all
       else
-        Game.left_outer_joins(:game_manager_assignments).where(game_manager_assignments: { user: user })
+        Game.left_outer_joins(:assignment).where(assignment: { user: user })
       end
     end
   end
 
   def create?
-    user.role? :admin
+    user.is_admin?
   end
 
   def index?
@@ -74,11 +74,11 @@ class GamePolicy < ApplicationPolicy
   end
 
   private
-  def has_right method
-    @gm_assignment ||= GameManagerAssignment.where(user: user, game: record)
-    @gm_assignment.each do |assignment|
+  def has_right(method)
+    @assignment ||= Assignment.where(user: user, game: record)
+    @assignment.each do |assignment|
       return true if assignment.has_right?(method)
     end
-    user.role? :admin
+    user.is_admin?
   end
 end

@@ -10,14 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171129105131) do
+ActiveRecord::Schema.define(version: 20171224224316) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "role_id"
+    t.integer "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["role_id"], name: "index_assignments_on_role_id"
+    t.integer "rights", default: 1
+    t.index ["game_id"], name: "index_assignments_on_game_id"
+    t.index ["user_id", "game_id"], name: "index_assignments_on_user_id_and_game_id", unique: true
     t.index ["user_id"], name: "index_assignments_on_user_id"
   end
 
@@ -32,17 +34,6 @@ ActiveRecord::Schema.define(version: 20171129105131) do
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_command_jobs_on_game_id"
     t.index ["user_id"], name: "index_command_jobs_on_user_id"
-  end
-
-  create_table "game_manager_assignments", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "game_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "rights", default: 1
-    t.index ["game_id"], name: "index_game_manager_assignments_on_game_id"
-    t.index ["user_id", "game_id"], name: "index_game_manager_assignments_on_user_id_and_game_id", unique: true
-    t.index ["user_id"], name: "index_game_manager_assignments_on_user_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -61,12 +52,6 @@ ActiveRecord::Schema.define(version: 20171129105131) do
     t.string "shortname"
     t.text "description"
     t.text "configs"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "roles", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

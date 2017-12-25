@@ -7,15 +7,12 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 8 }
 
   has_many :assignments
-  has_many :roles, through: :assignments
-
-  has_many :game_manager_assignments
-  has_many :games, through: :game_manager_assignments
+  has_many :games, through: :assignments
 
   has_secure_password
 
-  def role?(role)
-    roles.any? { |r| r.name.underscore.to_sym == role }
+  def is_admin?
+    email == 'admin'
   end
 
   def authenticated

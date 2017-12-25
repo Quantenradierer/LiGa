@@ -7,7 +7,7 @@ class AnonymousUser < User
     false
   end
 
-  def roles?
-    []
+  def is_admin?
+    false
   end
 end

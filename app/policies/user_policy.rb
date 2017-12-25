@@ -1,7 +1,7 @@
 class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.role? :admin
+      if user.is_admin?
         scope.all
       else
         scope.none
@@ -10,18 +10,22 @@ class UserPolicy < ApplicationPolicy
   end
 
   def create?
-    user.role? :admin
+    user.is_admin?
   end
 
   def update?
-    user.role? :admin
+    user.is_admin?
   end
 
   def show?
-    user.role? :admin
+    user.is_admin?
   end
 
   def index?
-    user.role? :admin or user == record
+    user.is_admin? or user == record
+  end
+
+  def change_password?
+    user == record
   end
 end

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
   end
   resources :commands
-  resources :game_manager_assignments, only: [:update, :create]
+  resources :assignments, only: [:update, :create]
   resources :games do
     resources :gamelogs, only: :show, id: /[^\/]+/
     resources :gameconfigs, only: [:edit, :update], id: /[^\/]+/

@@ -29,6 +29,7 @@ class UsersController < ApplicationController
   end
 
   def change_password
+    authorize current_user
     params = password_params
     raise Exception.new('TODO') unless params[:password] == params[:password_confirmation]
     raise Exception.new('TODO') unless current_user.authenticate(params[:current_password])

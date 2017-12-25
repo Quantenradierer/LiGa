@@ -38,8 +38,8 @@
       <th>Speichern</th>
     </tr>
 
-    <% @user.game_manager_assignments.each do |gm| %>
-      <%= form_with scope: :game_manager_assignments, :method => :PUT, url: game_manager_assignment_path(gm.id), local: true do |form| %>
+    <% @user.assignments.each do |gm| %>
+      <%= form_with scope: :assignments, :method => :PUT, url: assignment_path(gm.id), local: true do |form| %>
         <tr>
           <td><%= gm.game.title %></td>
           <td><%= gm.game.gametype.name %></td>
@@ -52,7 +52,7 @@
     <% end %>
   </table>
 
-  <%= form_with scope: :game_manager_assignments, url: game_manager_assignments_path, local: true do |form| %>
+  <%= form_with scope: :assignments, url: assignments_path, local: true do |form| %>
     <%= form.hidden_field(:user_id, :value => @user.id) %>
       <%= form.select(:game_id) do %>
       <% @games.each do |game| %>
