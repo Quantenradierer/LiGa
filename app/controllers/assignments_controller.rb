@@ -5,7 +5,7 @@ class AssignmentsController < ApplicationController
 
   def create
     assignment = Assignment.new(assignment_params)
-    authorize assignment.game, :create?
+    authorize assignment.game, :rights?
     assignment.save
     redirect_to assignment.user
   end
