@@ -12,10 +12,10 @@ Rails.application.routes.draw do
     end
   end
   resources :commands
-  resources :assignments, only: [:update, :create]
+  resources :assignments, only: %i[update create]
   resources :games do
-    resources :gamelogs, only: :show, id: /[^\/]+/
-    resources :gameconfigs, only: [:edit, :update], id: /[^\/]+/
+    resources :gamelogs, only: :show, id: %r{/[^\/]+/}
+    resources :gameconfigs, only: %i[edit update], id: %r{/[^\/]+/}
     member do
       post 'start'
       post 'stop'

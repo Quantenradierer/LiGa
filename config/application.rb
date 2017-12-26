@@ -7,12 +7,15 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module Liga
+  # Module for the Liga Project
+  #
+  #
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
     config.active_job.queue_adapter = :sidekiq
 
-    # Settings in config/environments/* take precedence over those specified here.
+    # Settings in config/environments/* take precedence over those specified.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
   end

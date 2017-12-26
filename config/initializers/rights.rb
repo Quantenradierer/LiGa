@@ -18,7 +18,7 @@ RIGHTS = {
   # medium important config files, like the game operators
 
   edit_config_high?: 2**13,
-  # high important config files, like the used memory, port, and game administrators
+  # high config files, like the used memory, port, and game administrators
 
-  rights?: 2**14
+  give_rights?: 2**14
 }.freeze

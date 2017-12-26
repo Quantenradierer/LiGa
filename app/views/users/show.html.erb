@@ -44,7 +44,7 @@
           <td><%= assignment.game.title %></td>
           <td><%= assignment.game.gametype.name %></td>
           <% RIGHTS.each do |name, _| %>
-              <th><%= form.check_box name, {checked: assignment.has_right?(name)} %></th>
+              <th><%= form.check_box name, {checked: assignment.right?(name)} %></th>
           <% end %>
           <td><%= form.submit %></td>
         </tr>

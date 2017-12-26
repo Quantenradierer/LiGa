@@ -5,37 +5,37 @@
 <div class="content">
   <%= form_with scope: :game, url: games_path, local: true do |form| %>
 
-  <% if @game.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@game.errors.count, "error") %> prohibited
-        this article from being saved:
-      </h2>
-      <ul>
-        <% @game.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <% if @game.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@game.errors.count, "error") %> prohibited
+          this article from being saved:
+        </h2>
+        <ul>
+          <% @game.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-  <p>
-    <div>
-      <%= form.label t('games.title') %>
-      <%= form.text_field :title %>
-    </div>
-    <div>
-      <%= form.label t('games.server') %>
-      <%= form.select(:gametype_id) do %>
-        <% @gametypes.each do |gametype| %>
-          <%= content_tag(:option, gametype.name, value: gametype.id) %>
+    <p>
+      <div>
+        <%= form.label t('games.title') %>
+        <%= form.text_field :title %>
+      </div>
+      <div>
+        <%= form.label t('games.server') %>
+        <%= form.select(:gametype_id) do %>
+          <% @gametypes.each do |gametype| %>
+            <%= content_tag(:option, gametype.name, value: gametype.id) %>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
-  </p>
+      </div>
+    </p>
 
-  <p>
-    <%= form.submit t('games.create_server') %>
-  </p>
+    <p>
+      <%= form.submit t('games.create_server') %>
+    </p>
   <% end %>
 </div>
