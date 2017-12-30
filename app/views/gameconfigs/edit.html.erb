@@ -4,10 +4,10 @@
 
 <div class="content">
   <%= form_with scope: :gameconfig, url: game_gameconfig_path, :method => :PUT, local: true do |form| %><p>
-    <%= form.text_area :config, value: @config, size: "80x50" %>
+    <%= form.text_area :config, value: @conf.get(''), size: "80x50" %>
   </p>
   <p>
-    <%= submit_tag(t(gameconfig.edit)) %>
+    <%= submit_tag(t('gameconfig.edit')) %>
   </p>
   <% end %>
 </div>

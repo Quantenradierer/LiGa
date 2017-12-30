@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171225211047) do
+ActiveRecord::Schema.define(version: 20171226113633) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer "user_id"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20171225211047) do
     t.index ["user_id"], name: "index_command_jobs_on_user_id"
   end
 
-  create_table "configuration", force: :cascade do |t|
+  create_table "configs", force: :cascade do |t|
     t.integer "gametype_id"
     t.integer "priority"
     t.string "configurator"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20171225211047) do
     t.integer "constraint"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["gametype_id"], name: "index_configuration_on_gametype_id"
+    t.index ["gametype_id"], name: "index_configurations_on_gametype_id"
   end
 
   create_table "games", force: :cascade do |t|

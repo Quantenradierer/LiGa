@@ -82,9 +82,9 @@
 
   <p>
     <strong>Verfügbare Einstellungen:</strong>
-    <% @game.available_configs.each do |file| %>
+    <% @game.configs.each do |conf| %>
         <br/>
-        <%= link_to File.basename(file), edit_game_gameconfig_path(@game, File.basename(file))%>
+        <%= link_to File.basename(conf.file), edit_game_gameconfig_path(@game, conf)%>
     <% end %>
   </p>
 

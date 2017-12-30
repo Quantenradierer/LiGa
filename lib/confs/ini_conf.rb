@@ -1,11 +1,8 @@
+require_relative 'conf'
+
 require 'inifile'
 
-class IniConf < FileConf
-  def initialize(path)
-    super(path)
-    @file = IniFile.load(path)
-  end
-
+class IniConf < Conf
   def get(key)
     if key.is_a?(Array)
       assert(key.length == 2)
@@ -17,4 +14,19 @@ class IniConf < FileConf
     end
     @file[category][conf]
   end
+
+  def set(key, value)
+    @file[category][conf] = value
+  end
+
+  def load(game)
+    Dir.chdir(game.path) do
+      @file = IniFile.load(@config.file)
+    end
+  end
+
+  def save(game)
+    @file.save
+  end
+
 end

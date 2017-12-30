@@ -35,6 +35,8 @@ gem 'pundit', '1.1.0', :git => 'https://github.com/elabs/pundit.git'
 
 gem 'sidekiq', '5.0.5'
 
+gem 'inifile', '3.0.0'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -71,12 +71,13 @@ class GamesController < ApplicationController
   def destroy
     game = authorize Game.find(params[:id])
     DeleteWorker.perform_later(
-        CommandJob.create(user_id: current_user.id, game_id: game.id, worker: DeleteWorker)
+      CommandJob.create(user_id: current_user.id, game_id: game.id, worker: DeleteWorker)
     )
     redirect_to games_path
   end
 
   private
+
   def game_params
     params.require(:game).permit(:title, :gametype_id)
   end
