@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :commands
   resources :assignments, only: %i[update create]
   resources :games do
-    resources :gamelogs, only: :show, id: %r{/[^\/]+/}
+    resources :gamelogs, only: %i[show], id: /[^\/]+/
     resources :gameconfigs, only: %i[edit update]
 
     member do

@@ -10,16 +10,12 @@ class FileConf < Conf
   end
 
   def load(game)
-    Dir.chdir(game.path) do
-      File.open(@config.file) do |handle|
-        @content = handle.readlines.join
-      end
+    File.open(File.join(game.path, 'serverfiles', @config.file)) do |handle|
+      @content = handle.readlines.join
     end
   end
 
   def save(game)
-    File.open(@config.file, 'wb') do |handle|
-      handle.write(@content)
-    end
+    File.write(File.join(game.path, 'serverfiles', @config.file), @content)
   end
 end

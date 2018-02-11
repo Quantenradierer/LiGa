@@ -84,7 +84,7 @@
     <strong>Verfügbare Einstellungen:</strong>
     <% @game.configs.each do |conf| %>
         <br/>
-        <%= link_to File.basename(conf.file), edit_game_gameconfig_path(@game, conf)%>
+        <%= link_to File.basename(conf.file), edit_game_gameconfig_path(@game, conf) %>
     <% end %>
   </p>
 
@@ -92,7 +92,7 @@
     <strong>Verfügbare Logs:</strong>
     <% @game.available_logs.each do |file| %>
       <br/>
-        <%= link_to File.basename(file), game_gamelog_path(@game, File.basename(file))%>
+        <%= link_to File.basename(file), game_gamelog_path(@game, File.basename(file)) %>
     <% end %>
   </p>
 </div>
