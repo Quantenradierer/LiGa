@@ -4,7 +4,7 @@ class GamePolicy < ApplicationPolicy
       if user.is_admin?
         scope.all
       else
-        Game.left_outer_joins(:assignment).where(assignment: { user: user })
+        user.games
       end
     end
   end
