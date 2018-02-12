@@ -14,6 +14,14 @@ class GamesController < ApplicationController
     @games = policy_scope(Game)
   end
 
+  def backup
+    @game = authorize Game.find(params[:id])
+    BackupWorker.perform_later(
+      CommandJob.create(user_id: current_user.id, game_id: @game.id, worker: BackupWorker)
+    )
+    redirect_to @game
+  end
+
   def upgrade
     @game = authorize Game.find(params[:id])
     UpgradeWorker.perform_later(

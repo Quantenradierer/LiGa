@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       post 'stop'
       post 'upgrade'
       post 'upgrade_lgsm'
+      post 'backup'
     end
   end
 

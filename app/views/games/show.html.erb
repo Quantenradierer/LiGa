@@ -46,7 +46,7 @@
       </div>
 
       <div style="display: inline-block">
-        <%= form_with scope: :game, url: start_game_path, local: true do |form| %>
+        <%= form_with scope: :game, url: backup_game_path, local: true do |form| %>
           <%= submit_tag(t('command.types.backup'), class: "cmd_btn") %>
         <% end %>
       </div>
