@@ -41,7 +41,7 @@
     <div>
       <div style="display: inline-block">
         <%= form_with scope: :game, url: start_game_path, local: true do |form| %>
-          <%= submit_tag(t('command.types.settings'), class: "cmd_btn") %>
+          <%= submit_tag(t('command.types.settings'), disabled: true, class: "cmd_btn") %>
         <% end %>
       </div>
 
@@ -54,7 +54,7 @@
     <div>
       <div style="display: inline-block">
         <%= form_with scope: :game, url: start_game_path, local: true do |form| %>
-          <%= submit_tag(t('command.types.console'), class: "cmd_btn") %>
+          <%= submit_tag(t('command.types.console'), disabled: true, class: "cmd_btn") %>
         <% end %>
       </div>
 
