@@ -22,19 +22,19 @@
     <div>
       <div style="display: inline-block">
         <%= form_with scope: :game, url: start_game_path, local: true do |form| %>
-          <%= submit_tag(t('command.types.start'), class: "cmd_btn") %>
+          <%= submit_tag(t('command.types.start'), disabled: !policy(@game).start?, class: "cmd_btn") %>
         <% end %>
       </div>
 
       <div style="display: inline-block">
         <%= form_with scope: :game, url: stop_game_path, local: true do |form| %>
-          <%= submit_tag(t('command.types.stop'), class: "cmd_btn") %>
+          <%= submit_tag(t('command.types.stop'), disabled: !policy(@game).stop?, class: "cmd_btn") %>
         <% end %>
       </div>
 
       <div style="display: inline-block">
         <%= form_with scope: :game, url: upgrade_game_path, local: true do |form| %>
-          <%= submit_tag(t('command.types.upgrade'), class: "cmd_btn") %>
+          <%= submit_tag(t('command.types.upgrade'), disabled: !policy(@game).upgrade?, class: "cmd_btn") %>
         <% end %>
       </div>
     </div>
@@ -47,7 +47,7 @@
 
       <div style="display: inline-block">
         <%= form_with scope: :game, url: backup_game_path, local: true do |form| %>
-          <%= submit_tag(t('command.types.backup'), class: "cmd_btn") %>
+          <%= submit_tag(t('command.types.backup'), disabled: !policy(@game).backup?, class: "cmd_btn") %>
         <% end %>
       </div>
     </div>
@@ -60,13 +60,13 @@
 
       <div style="display: inline-block">
         <%= form_with scope: :game, url: upgrade_lgsm_game_path, local: true do |form| %>
-          <%= submit_tag(t('command.types.upgrade_lgsm'), class: "cmd_btn") %>
+          <%= submit_tag(t('command.types.upgrade_lgsm'), disabled: !policy(@game).upgrade_lgsm?, class: "cmd_btn") %>
         <% end %>
       </div>
 
       <div style="display: inline-block">
         <%= form_with scope: :game, url: start_game_path, local: true do |form| %>
-          <%= submit_tag(t('command.types.delete'), class: "cmd_btn") %>
+          <%= submit_tag(t('command.types.delete'), disabled: !policy(@game).destroy?, class: "cmd_btn") %>
         <% end %>
       </div>
     </div>
@@ -80,6 +80,7 @@
     <% end %>
   </p>
 
+  <% if policy(@game).edit_config_low? %>
   <p>
     <strong>Verfügbare Einstellungen:</strong>
     <% @game.configs.each do |conf| %>
@@ -87,7 +88,9 @@
         <%= link_to File.basename(conf.file), edit_game_gameconfig_path(@game, conf) %>
     <% end %>
   </p>
+  <% end %>
 
+  <% if policy(@game).logs? %>
   <p>
     <strong>Verfügbare Logs:</strong>
     <% @game.available_logs.each do |file| %>
@@ -95,4 +98,5 @@
         <%= link_to File.basename(file), game_gamelog_path(@game, File.basename(file)) %>
     <% end %>
   </p>
+  <% end %>
 </div>
