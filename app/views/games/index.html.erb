@@ -13,7 +13,7 @@
 
     <% @games.each do |game| %>
       <tr>
-        <td>-</td>
+        <td><%= game.status == 1 ? 'ONLINE' : 'OFFLINE' %></td>
         <td><%= link_to game.title, game_path(game) %></td>
         <td><%= game.gametype.name %></td>
         <td>0/0</td>

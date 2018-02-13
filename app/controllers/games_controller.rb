@@ -12,6 +12,7 @@ class GamesController < ApplicationController
 
   def index
     @games = policy_scope(Game)
+    GameStateWorker.perform_later
   end
 
   def backup
